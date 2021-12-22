@@ -5,17 +5,16 @@ from sklearn.model_selection import train_test_split
 
 # Kerasに付属の手書き数字画像データをダウンロード
 np.random.seed(0)
+# MNISTデータを読込む
 (X_train_base, labels_train_base), (X_test, labels_test) = mnist.load_data()
 
-# Training set を学習データ（X_train, labels_train）と検証データ（X_validation, labels_validation）に8:2で分割する
+# Training set を学習データ（X_train, labels_train）と検証データ（X_validation, labels_validation）に8:2で分割する（20％をテストにあてる）
 X_train,X_validation,labels_train,labels_validation = train_test_split(X_train_base,labels_train_base,test_size = 0.2)
 
-# 各画像は行列なので1次元に変換→X_train,X_validation,X_testを上書き
+# 各画像は行列なので1次元に変換　X_train,X_validation,X_testを上書きし正規化して整える
 X_train = X_train.reshape(-1,784)
 X_validation = X_validation.reshape(-1,784)
 X_test = X_test.reshape(-1,784)
-
-#正規化
 X_train = X_train.astype('float32')
 X_validation = X_validation.astype('float32')
 X_test = X_test.astype('float32')
@@ -23,7 +22,7 @@ X_train /= 255
 X_validation /= 255
 X_test /= 255
 
-# 訓練・テストデータの設定
+# テストデータの設定
 from catboost import Pool
 
 train_pool = Pool(X_train, labels_train)
