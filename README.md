@@ -4,7 +4,7 @@
 pythonは3．6にて実装してください。
 
 必要なライブラリ一覧
-・nunpy　
+・numpy　
 ・pandas
 ・xgboost 
 ・lightgbm
